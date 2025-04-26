@@ -1,0 +1,190 @@
+{
+  "2535.png": {
+    "class": "detected",
+    "confidence": "98.0%"
+  },
+  "2511.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9998.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9993.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9982.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9981.png": {
+    "class": "detected",
+    "confidence": "99.8%"
+  },
+  "9979.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9985.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9988.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9996.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9960.png": {
+    "class": "detected",
+    "confidence": "99.4%"
+  },
+  "9968.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9974.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9973.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9964.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9966.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9976.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9984.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "21.png": {
+    "class": "detected",
+    "confidence": "97.0%"
+  },
+  "9969.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9978.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9980.png": {
+    "class": "non-detected",
+    "confidence": "77.0%"
+  },
+  "9986.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9972.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9989.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9990.png": {
+    "class": "detected",
+    "confidence": "99.7%"
+  },
+  "9994.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9983.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9971.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9991.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9977.png": {
+    "class": "detected",
+    "confidence": "99.9%"
+  },
+  "9992.png": {
+    "class": "detected",
+    "confidence": "99.8%"
+  },
+  "9962.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9967.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9995.png": {
+    "class": "non-detected",
+    "confidence": "32.2%"
+  },
+  "9975.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9987.png": {
+    "class": "detected",
+    "confidence": "99.9%"
+  },
+  "9999.png": {
+    "class": "detected",
+    "confidence": "98.7%"
+  },
+  "9970.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9961.png": {
+    "class": "detected",
+    "confidence": "3.9%"
+  },
+  "9997.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "9965.png": {
+    "class": "non-detected",
+    "confidence": "99.1%"
+  },
+  "9963.png": {
+    "class": "detected",
+    "confidence": "100.0%"
+  },
+  "0.png": {
+    "class": "detected",
+    "confidence": "94.9%"
+  },
+  "19.png": {
+    "class": "detected",
+    "confidence": "62.8%"
+  },
+  "29.png": {
+    "class": "detected",
+    "confidence": "81.8%"
+  },
+  "17934.png": {
+    "class": "non-detected",
+    "confidence": "99.6%"
+  }
+}

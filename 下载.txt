@@ -1,0 +1,22 @@
+sudo apt update
+sudo apt install mysql-server
+mysql --version
+service mysql status
+如果stop用下面这个然后再检验
+sudo service mysql restart
+
+sudo mysql
+use mysql;
+select user, host, plugin from user;
+#MySQL8.0必须先执行此步骤设置密码，MySQL5.7可以选择先安装下面的secure！！！
+alter user 'root'@'localhost' identified with mysql_native_password by '123456qwer';
+flush privileges;
+exit;
+mysql -uroot -p
+
+unzip -O gbk 识别算法网站.zip
+pip install flask
+pip install flask-cors
+pip install mysql-connector-python
+pip install Pillow
+

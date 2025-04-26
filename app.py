@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, redirect, url_for, send_file
+
 # from db import cnxpool  # 引入连接池
 # from flask_cors import CORS
 #
@@ -7,6 +8,12 @@ app = Flask(__name__)
 #
 # # 确保连接池可在全局范围内访问
 # app.config['dbpool'] = cnxpool
+
+# 添加根路径的重定向
+@app.route('/')
+def root():
+    return redirect(url_for('web_api.upload'))  # 重定向到蓝图的 upload 路由
+
 
 # 注册蓝图
 from api.web import web_api

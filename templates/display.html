@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solar Panel Defect Detection</title>
+  <link rel="stylesheet" href="../static/css/upload.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+    }
+
+    .modal-content {
+      display: block;
+      margin: auto;
+      max-height: 100vh;
+      height: 100vh;
+      width: auto;
+      animation: zoom 0.3s;
+      cursor: pointer;
+      object-fit: contain;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    @keyframes zoom {
+      from {transform: scale(0)}
+      to {transform: scale(1)}
+    }
+
+    .image-container:hover {
+      transform: scale(1.02);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+<div class="header" style="background-color:white; display: flex; justify-content: space-between; padding: 40px 100px;">
+  <div class="title">
+    <h1>Solar Panel Defect Detection</h1>
+  </div>
+  <div class="nav">
+        <a href="/web/explain" style="display:inline-block;vertical-align: middle;font-weight: 600">Home</a>
+        <a href="/web/upload" style="display:inline-block;vertical-align: middle; font-weight: 600" >Defect Detection</a>
+        <a href="/web/display" style="display:inline-block;vertical-align: middle; color: #007bff; font-weight: 600" >Result</a>
+  </div>
+</div>
+
+<div class="page-header"></div>
+
+<div style="padding: 50px 90px 30px 90px;">
+  <a href="/web/upload" style="font-size: 36px; color: #007bff; text-decoration: none; font-weight: 600;">
+    ← Return to Upload
+  </a>
+</div>
+
+<div style="font-weight: 600; font-size: 36px; padding: 50px 90px 30px 90px;">Result</div>
+
+<div class="display-section" id="imageGallery" style="padding: 0 90px 30px 90px;"></div>
+
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="expandedImg">
+</div>
+
+<div class="page-footer">
+  <div style="font-size: 24px; font-weight: 800;">Chengdu University of Technology & Oxford Brookes College</div>
+  <div style="font-size: 14px; font-weight: 600;">Address:No. 1, Dongsan Road, Erxianqiao, Chenghua District, Chengdu City, Sichuan Province, China <br>Student E-mail: xiang.yucheng.zy.cdut.com</div>
+</div>
+
+<script>
+window.onload = function () {
+  const modal = document.getElementById("myModal");
+  const modalImg = document.getElementById("expandedImg");
+  const closeBtn = document.getElementsByClassName("close")[0];
+  const gallery = document.getElementById('imageGallery');
+
+  const imagesPerPage = 12;
+  let currentPage = 1;
+  let allImages = [];
+
+  function displayPage(page) {
+    gallery.innerHTML = '';
+
+    const start = (page - 1) * imagesPerPage;
+    const end = start + imagesPerPage;
+    const pageImages = allImages.slice(start, end);
+
+    const gridWrapper = document.createElement('div');
+    gridWrapper.style.display = 'grid';
+    gridWrapper.style.gridTemplateColumns = 'repeat(auto-fill, minmax(250px, 1fr))';
+    gridWrapper.style.gap = '30px';
+    gridWrapper.style.padding = '0 90px'; // 控制左右边距
+    gridWrapper.style.boxSizing = 'border-box';
+
+    pageImages.forEach(imageName => {
+      const container = document.createElement('div');
+      container.classList.add('image-container');
+      container.style.cursor = 'pointer';
+      container.style.display = 'flex';
+      container.style.flexDirection = 'column';
+      container.style.alignItems = 'center';
+      container.style.justifyContent = 'center';
+
+
+      const imgElement = document.createElement('img');
+      const src = `../static/img/temp_img/${imageName}`;
+      imgElement.src = src;
+      imgElement.style.width = '250px';
+      imgElement.style.height = '250px';
+      imgElement.style.objectFit = 'cover';
+
+      imgElement.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        modalImg.style.maxHeight = window.innerHeight + "px";
+        document.body.style.overflow = 'hidden';
+      };
+
+      const fileNameElement = document.createElement('p');
+      fileNameElement.innerHTML = `<strong>${imageName}</strong><br>Loading...`;
+
+      container.appendChild(imgElement);
+      container.appendChild(fileNameElement);
+      gridWrapper.appendChild(container);
+
+      fetch(src)
+        .then(res => res.blob())
+        .then(blob => {
+          const file = new File([blob], imageName, { type: blob.type });
+          const formData = new FormData();
+          formData.append('image', file);
+
+          return axios.post('http://127.0.0.1:5000/img/upload_file', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          });
+        })
+        .then(res => {
+          const result = res.data;
+          const color = result.class === 'detected' ? 'red' : 'green';
+          fileNameElement.innerHTML = `
+            <strong>${result.filename}</strong><br>
+            <span style="color: ${color}; font-weight: bold;">${result.class.toUpperCase()}</span><br>
+            Confidence: ${result.confidence}
+          `;
+        })
+        .catch(err => {
+          console.error(err);
+          fileNameElement.innerHTML = `${imageName}<br><span style="color:red;">Prediction Failed</span>`;
+        });
+    });
+
+    gallery.appendChild(gridWrapper);
+    renderPagination();
+  }
+
+  function renderPagination() {
+    const totalPages = Math.ceil(allImages.length / imagesPerPage);
+    let paginationContainer = document.getElementById("pagination");
+    if (!paginationContainer) {
+      paginationContainer = document.createElement('div');
+      paginationContainer.id = 'pagination';
+      paginationContainer.style.textAlign = 'center';
+      paginationContainer.style.margin = '30px 0';
+      gallery.appendChild(paginationContainer);
+    }
+    paginationContainer.innerHTML = '';
+
+    function createButton(text, page, disabled = false, highlight = false) {
+      const btn = document.createElement('button');
+      btn.innerText = text;
+      btn.style.margin = '0 5px';
+      btn.style.padding = '10px 15px';
+      btn.style.cursor = disabled ? 'not-allowed' : 'pointer';
+      btn.style.borderRadius = '5px';
+      btn.style.border = '1px solid #ccc';
+      btn.style.backgroundColor = highlight ? '#007bff' : '#f8f8f8';
+      btn.style.color = highlight ? '#fff' : '#000';
+      btn.disabled = disabled;
+
+      if (!disabled) {
+        btn.onclick = () => {
+          currentPage = page;
+          displayPage(currentPage);
+        };
+      }
+
+      paginationContainer.appendChild(btn);
+    }
+
+    createButton('« First', 1, currentPage === 1);
+    createButton('‹ Prev', currentPage - 1, currentPage === 1);
+
+    const maxDisplay = 7;
+    let start = Math.max(1, currentPage - 2);
+    let end = Math.min(totalPages, currentPage + 2);
+
+    if (totalPages > maxDisplay) {
+      if (currentPage <= 4) end = 5;
+      else if (currentPage >= totalPages - 3) start = totalPages - 4;
+    }
+
+    if (start > 1) {
+      createButton('1', 1);
+      if (start > 2) {
+        const dots = document.createElement('span');
+        dots.innerText = '...';
+        dots.style.margin = '0 5px';
+        paginationContainer.appendChild(dots);
+      }
+    }
+
+    for (let i = start; i <= end; i++) {
+      createButton(i, i, false, i === currentPage);
+    }
+
+    if (end < totalPages) {
+      if (end < totalPages - 1) {
+        const dots = document.createElement('span');
+        dots.innerText = '...';
+        dots.style.margin = '0 5px';
+        paginationContainer.appendChild(dots);
+      }
+      createButton(totalPages, totalPages);
+    }
+
+    createButton('Next ›', currentPage + 1, currentPage === totalPages);
+    createButton('Last »', totalPages, currentPage === totalPages);
+  }
+
+  axios.get('http://127.0.0.1:5000/img/getDetected')
+    .then(response => {
+      allImages = response.data;
+      displayPage(currentPage);
+    })
+    .catch(error => {
+      console.error('Error fetching images:', error);
+    });
+
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
+    document.body.style.overflow = 'auto';
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = 'auto';
+    }
+  };
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === "Escape") {
+      modal.style.display = "none";
+      document.body.style.overflow = 'auto';
+    }
+  });
+};
+</script>
+</body>
+</html>

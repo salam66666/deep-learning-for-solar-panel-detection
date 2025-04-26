@@ -1,0 +1,124 @@
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f9;
+}
+.title {
+  font-size: 20px;
+}
+/* Page header */
+.page-header {
+  background: url('../img/bg.jpg') no-repeat center center;
+  background-size: cover;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.header .title h1 {
+  display: inline-block; /* Make h1 inline-block to align with nav */
+  margin-right: 20px;    /* Add space between h1 and the navigation links */
+}
+
+.header .nav {
+  display: inline-block; /* Make nav inline-block to align with h1 */
+}
+
+.header .nav a {
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0 10px;
+  font-weight: 500;
+}
+
+/* Upload section */
+.upload-section {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: white;
+}
+
+.upload-box {
+  display: inline-block;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 80px;
+  margin: 20px;
+  width: 40%;
+  height: 400px;
+  cursor: pointer;
+}
+
+
+.upload-box p {
+  font-size: 20px;
+  color: #555;
+}
+.upload-box h3 {
+  font-size: 25px;
+  font-weight: 600;
+  color: #007bff;
+}
+/* Page footer */
+.page-footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 50px 90px 30px 90px;
+  margin-top: 40px;
+}
+
+.page-footer a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.page-footer .social-icons i {
+  font-size: 20px;
+  margin: 0 10px;
+  color: white;
+}
+
+    /* CSS for image display */
+    .image-container {
+      display: inline-block;
+      text-align: center; /* Center align the text below the image */
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .image-container img {
+      width: 300px;
+      height: auto;
+      border: 1px solid grey; /* Black border for image */
+      margin: 20px;
+
+    }
+
+    .image-container p {
+      margin-top: 5px;
+      font-size: 12px;
+      color: #333;
+      font-weight: 600;
+
+    }
