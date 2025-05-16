@@ -1,0 +1,182 @@
+{
+  "24.png": {
+    "class": "defected",
+    "confidence": "98.9%"
+  },
+  "34.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "30.png": {
+    "class": "non-defected",
+    "confidence": "42.5%"
+  },
+  "37.png": {
+    "class": "non-defected",
+    "confidence": "95.1%"
+  },
+  "38.png": {
+    "class": "defected",
+    "confidence": "61.5%"
+  },
+  "32.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "36.png": {
+    "class": "defected",
+    "confidence": "95.7%"
+  },
+  "39.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "33.png": {
+    "class": "defected",
+    "confidence": "5.2%"
+  },
+  "9408.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "35.png": {
+    "class": "defected",
+    "confidence": "59.5%"
+  },
+  "7356.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "31.png": {
+    "class": "non-defected",
+    "confidence": "98.6%"
+  },
+  "7515.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "21_83fd8089.png": {
+    "class": "defected",
+    "confidence": "93.2%"
+  },
+  "8111_7112c022.png": {
+    "class": "defected",
+    "confidence": "99.7%"
+  },
+  "7727_f486cfac.png": {
+    "class": "defected",
+    "confidence": "99.9%"
+  },
+  "7724_5fb10793.png": {
+    "class": "defected",
+    "confidence": "99.7%"
+  },
+  "19_b593b4dd.png": {
+    "class": "defected",
+    "confidence": "94.6%"
+  },
+  "9017_19454a1a.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "36_f6e4dfd8.png": {
+    "class": "defected",
+    "confidence": "92.1%"
+  },
+  "7096_30b1aafc.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "7727_9573736d.png": {
+    "class": "defected",
+    "confidence": "99.9%"
+  },
+  "7293_5790aad1.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "7727_b3ab799c.png": {
+    "class": "defected",
+    "confidence": "99.9%"
+  },
+  "7425.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "7406_213facaa.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "7576_74a5814f.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "7478_146a9f92.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "36_80840d87.png": {
+    "class": "defected",
+    "confidence": "92.1%"
+  },
+  "7454_d3936985.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "7728_d33ca02e.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "16125_f9ddfd85.png": {
+    "class": "non-defected",
+    "confidence": "86.4%"
+  },
+  "7711_4bb4ad90.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "6985_126ae826.png": {
+    "class": "defected",
+    "confidence": "99.8%"
+  },
+  "78_e512fd9a.png": {
+    "class": "defected",
+    "confidence": "97.4%"
+  },
+  "7727_6d32729b.png": {
+    "class": "defected",
+    "confidence": "99.9%"
+  },
+  "7607_35bd0da8.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "7777_c7cac4e9.png": {
+    "class": "defected",
+    "confidence": "99.8%"
+  },
+  "7436_7d7e81f6.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "10003.png": {
+    "class": "non-defected",
+    "confidence": "99.5%"
+  },
+  "10025_9f6b6912.png": {
+    "class": "non-defected",
+    "confidence": "98.0%"
+  },
+  "8296.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  },
+  "7342_94b7e58e.png": {
+    "class": "defected",
+    "confidence": "99.8%"
+  },
+  "7425_67f2b4b3.png": {
+    "class": "defected",
+    "confidence": "100.0%"
+  }
+}

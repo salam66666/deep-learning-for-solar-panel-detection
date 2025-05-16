@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Panel Defect Detection</title>
+  <link rel="stylesheet" href="../static/css/upload.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="header" style="background-color:white;display: flex;flex-direction: row;justify-content: space-between;padding: 40px 100px">
+    <div class="title">
+      <h1>Solar Panel Defect Detection</h1>
+    </div>
+    <div class="nav" >
+        <a href="/web/explain" style="display:inline-block;vertical-align: middle; color: #007bff; font-weight: 600">Home</a>
+        <a href="/web/upload" style="display:inline-block;vertical-align: middle; font-weight: 600" >Defect Detection</a>
+        <a href="/web/display" style="display:inline-block;vertical-align: middle;  font-weight: 600" >Result</a>
+    </div>
+  </div>
+  <div class="page-header">
+
+  </div>
+
+      <style>
+        /* 基础样式 */
+
+        /* 主容器 */
+        .defects-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* 标题样式 */
+        .section-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            letter-spacing: -0.5px;
+        }
+
+        /* 缺陷列表 */
+        .common-defects {
+            margin-bottom: 60px;
+        }
+
+        .common-defects ul {
+            columns: 2;
+            column-gap: 60px;
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .common-defects li {
+            font-size: 18px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* 检测项样式 */
+        .defect-item {
+            margin: 40px 0;
+            padding: 30px;
+            background: #fbfcfd;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .defect-item h3 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+        }
+
+        .defect-item p {
+            font-size: 17px;
+            color: #4a5568;
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        /* 图片容器 */
+        .img-container {
+            margin: 25px 0 35px;
+        }
+
+        .defect-item img {
+            width: 24px;
+            height: 40px;
+            margin-right: 20px;
+            vertical-align: middle;
+        }
+
+        .defects-container p {
+            font-size: 18px;
+            line-height: 1.8;
+            padding: 12px 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .defects-container {
+                padding: 25px;
+                margin: 20px;
+            }
+
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
+
+            .common-defects ul {
+                columns: 1;
+            }
+
+            .defect-item {
+                padding: 20px;
+                margin: 30px 0;
+            }
+        }
+    </style>
+
+
+  <div style="padding: 50px 90px 30px 90px;">
+    <a href="/web/upload"
+       style="font-weight: 600;
+              font-size: 36px;
+              color: #007bff;
+              text-decoration: none;
+              cursor: pointer;
+              transition: all 0.3s ease;">
+        ← Return to Upload
+    </a>
+  </div>
+    <div class="defects-container">
+        <h2 class="section-title">About Solar Panel Defect Detection</h2>
+        <p>
+            Solar panels, vital components in renewable energy production, are prone to various defects over time, such as hotspots, cracks, delamination, and corrosion. These defects not only reduce energy output but also accelerate system degradation if left undetected. Thermal imaging technology offers a non-invasive and efficient method for identifying such anomalies by capturing heat patterns across solar panels.
+        </p>
+        <p>
+            Traditional manual inspection methods are labor-intensive and often ineffective at early-stage detection. Automated defect identification using deep learning models significantly enhances the accuracy, speed, and scalability of solar farm maintenance operations, ensuring minimal downtime and maximum energy yield.
+        </p>
+        <h2 class="section-title">About Our Detection Model</h2>
+        <p>
+            Our platform utilizes a customized deep learning model trained on thousands of thermal images. It is specifically designed to recognize different types of defects in solar panels with high accuracy. The model analyzes the thermal patterns and predicts whether a panel is healthy or degraded, enabling faster maintenance and reducing energy losses.
+        </p>
+        <p>
+            The system achieves certain performance metrics in terms of accuracy, precision and recall, so the test results of this system are for reference only.
+        </p>
+        <h2 class="section-title">Common Solar Panel Defects</h2>
+        <div class="common-defects">
+            <ul class="defect-list">
+                <li>Hotspots</li>
+                <li>Micro cracks (Cracking)</li>
+                <li>Delamination</li>
+                <li>Snail Trails</li>
+                <li>PID (Potential Induced Degradation)</li>
+                <li>Cell Fractures (Cell, Cell-Multi)</li>
+                <li>Corrosion</li>
+                <li>Encapsulation Failure</li>
+                <li>Cracking</li>
+                <li>Diode Failure</li>
+                <li>Module Offline</li>
+                <li>Shadowing</li>
+                <li>Vegetation</li>
+                <li>Soiling</li>
+            </ul>
+        </div>
+
+
+    <!-- Detectable Defects with Thermal Signatures -->
+
+        <h2 class="section-title">Detectable Defects</h2>
+
+        <div class="defect-item">
+            <h3>1. Cell Defect</h3>
+            <img src="../static/img/cell_defect.png" alt="Cell Defect" width="24" height="40">
+
+            <p><strong>Thermal Signature:</strong> Isolated circular hotspots (ΔT >5°C) with sharp temperature gradients, caused by current crowding in damaged crystalline cells.</p>
+        </div>
+
+        <div class="defect-item">
+            <h3>2. Cell-Multi Defect</h3>
+            <img src="../static/img/cell_multi.png" alt="Cell-Multi" width="24" height="40">
+
+            <p><strong>Thermal Signature:</strong> Parallel thermal stripes (8-12°C variation) across interconnected cells, indicating crack propagation from mechanical stress.</p>
+        </div>
+
+        <div class="defect-item">
+            <h3>3. Cracking</h3>
+            <img src="../static/img/cracking.png" alt="Cracking" width="24" height="40">
+
+            <p><strong>Thermal Signature:</strong> Branch-like cold zones (ΔT 3-5°C) radiating from micro-crack origins, detectable before visual appearance.</p>
+        </div>
+
+        <div class="defect-item">
+            <h3>4. Diode Failure</h3>
+            <img src="../static/img/diode.png" alt="Diode Failure" width="24" height="40">
+
+            <p><strong>Thermal Signature:</strong> Sudden temperature spikes (60-80°C) near junction boxes with stair-step thermal patterns in bypass circuits.</p>
+        </div>
+
+        <div class="defect-item">
+            <h3>5. No-Anomaly</h3>
+            <img src="../static/img/no_anomaly.png" alt="No-Anomaly" width="24" height="40">
+
+            <p><strong>Thermal Signature:</strong> Uniform thermal distribution (ΔT <1°C) meeting IEC 61215 stability criteria.</p>
+        </div>
+
+        <div class="defect-item">
+            <h3>6. Offline-Module</h3>
+            <img src="../static/img/offline.png" alt="Offline-Module" width="24" height="40">
+
+            <p><strong>Thermal Signature:</strong> Ambient-matched profile (ΔT <0.5°C) showing zero current flow through disconnected circuits.</p>
+        </div>
+
+        <div class="defect-item">
+            <h3>7. Shadowing</h3>
+            <img src="../static/img/shadowing.png" alt="Shadowing" width="24" height="40">
+
+            <p><strong>Thermal Signature:</strong> Dynamic thermal gradients (4-15°C) matching obstruction shapes with rapid temperature recovery post-shadow.</p>
+        </div>
+
+        <div class="defect-item">
+            <h3>8. Vegetation</h3>
+            <img src="../static/img/vegetation.png" alt="Vegetation" width="24" height="40">
+
+            <p><strong>Thermal Signature:</strong> Persistent low-temperature zones (ΔT 3-8°C) showing NDVI-correlated vegetation patterns with moisture retention.</p>
+        </div>
+    </div>
+
+  <!-- Page Footer Section -->
+  <div class="page-footer">
+      <div style="text-align: left; font-size: 24px;font-weight: 800;margin-bottom: 20px">Chengdu University of Technology & Oxford Brookes College</div>
+      <div style="text-align: left; font-size: 14px;font-weight: 600">Address:No. 1, Dongsan Road, Erxianqiao, Chenghua District, Chengdu City, Sichuan Province, China <br>Student E-mail: xiang.yucheng.zy.cdut.com</div>
+      <div style="text-align: left;display: flex;flex-direction: row;margin: 20px auto">
+        <div style="width: 45px;
+  height: 45px;
+  border: 2px solid white; /* 设置白色边框 */
+  border-radius: 50%;      /* 设置圆形边框 */
+  padding: 5px;            /* 给图片添加内边距，增大圆圈的大小 */
+  background-color: transparent; /* 保证背景是透明的 */
+  margin-right: 20px;">
+          <img src="../static/img/github.png" style="width: 30px; height: 30px">
+        </div>
+        <div style="width: 45px;
+  height: 45px;
+  border: 2px solid white; /* 设置白色边框 */
+  border-radius: 50%;      /* 设置圆形边框 */
+  padding: 5px;            /* 给图片添加内边距，增大圆圈的大小 */
+  background-color: transparent; /* 保证背景是透明的 */
+  margin-right: 20px;">
+        <img src="../static/img/wechat.png" style="width: 30px; height: 30px">
+        </div>
+
+        <div style="width: 45px;
+  height: 45px;
+  border: 2px solid white; /* 设置白色边框 */
+  border-radius: 50%;      /* 设置圆形边框 */
+  padding: 5px;            /* 给图片添加内边距，增大圆圈的大小 */
+  background-color: transparent; /* 保证背景是透明的 */">
+          <img src="../static/img/sign.png" style="width: 30px; height: 30px">
+        </div>
+
+      </div>
+
+  </div>
+<script>
+
+</script>
+</body>
+</html>
+

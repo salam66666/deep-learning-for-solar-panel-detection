@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grad-CAM Result - Solar Panel Defect Detection</title>
+  <link rel="stylesheet" href="../static/css/upload.css">
+  <style>
+    .result-section {
+      text-align: center;
+      padding: 60px 100px;
+    }
+    .result-title {
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 40px;
+    }
+    .image-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .image-container {
+      flex: 1;
+      min-width: 250px;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;      /* 水平居中 */
+      justify-content: center;  /* 垂直居中 */
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;       /* 保持图像比例 */
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+
+    .prediction-result {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="header" style="background-color:white;display: flex;flex-direction: row;justify-content: space-between;padding: 40px 100px">
+    <div class="title">
+      <h1>Solar Panel Defect Detection</h1>
+    </div>
+    <div class="nav" >
+      <a href="/web/explain" style="font-weight: 600">Home</a>
+      <a href="/web/upload" style="color: #007bff;font-weight: 600">Defect Detection</a>
+      <a href="/web/display" style="font-weight: 600">Result</a>
+    </div>
+  </div>
+  <div class="page-header">
+
+  </div>
+  <div style="padding: 50px 90px 30px 90px;">
+      <a href="/web/upload" style="font-size: 36px; color: #007bff; text-decoration: none; font-weight: 600;">
+        ← Return to Upload
+      </a>
+  </div>
+
+
+  <div class="result-section">
+    <div class="result-title">Grad-CAM Prediction Result</div>
+    <div class="image-row">
+      <div class="image-container">
+        <div>Original Image</div>
+        <img id="originalImg" src="" alt="Original">
+      </div>
+      <div class="image-container">
+        <div>Grad-CAM Heatmap</div>
+        <img id="heatmapImg" src="" alt="Heatmap">
+      </div>
+      <div class="image-container">
+        <div>Overlay Result</div>
+        <img id="overlayImg" src="" alt="Overlay">
+      </div>
+    </div>
+    <div class="prediction-result" id="predictionText">Loading prediction...</div>
+    <div class="prediction-result" id="probabilityText"></div>
+  </div>
+
+  <div class="page-footer">
+    <div style="text-align: left; font-size: 24px;font-weight: 800;margin-bottom: 20px">Chengdu University of Technology & Oxford Brookes College</div>
+    <div style="text-align: left; font-size: 14px;font-weight: 600">Address: No. 1, Dongsan Road, Erxianqiao, Chenghua District, Chengdu City, Sichuan Province, China <br>Student E-mail: xiang.yucheng.zy.cdut.com</div>
+    <div style="text-align: left;display: flex;flex-direction: row;margin: 20px auto">
+      <div style="width: 45px;height: 45px;border: 2px solid white;border-radius: 50%;padding: 5px;background-color: transparent;margin-right: 20px;">
+        <img src="../static/img/github.png" style="width: 30px; height: 30px">
+      </div>
+      <div style="width: 45px;height: 45px;border: 2px solid white;border-radius: 50%;padding: 5px;background-color: transparent;margin-right: 20px;">
+        <img src="../static/img/wechat.png" style="width: 30px; height: 30px">
+      </div>
+      <div style="width: 45px;height: 45px;border: 2px solid white;border-radius: 50%;padding: 5px;background-color: transparent;">
+        <img src="../static/img/sign.png" style="width: 30px; height: 30px">
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const query = new URLSearchParams(window.location.search);
+    const original = query.get('original');
+    const heatmap = query.get('heatmap');
+    const overlay = query.get('overlay');
+    const label = query.get('class');
+    const conf = query.get('conf');
+
+    if (!original || !heatmap || !overlay) {
+      document.getElementById('predictionText').innerText = 'Missing image data.';
+    } else {
+      document.getElementById('originalImg').src = original;
+      document.getElementById('heatmapImg').src = heatmap;
+      document.getElementById('overlayImg').src = overlay;
+
+      document.getElementById('predictionText').innerHTML = `
+        Prediction: <span style="color: ${label === 'defected' ? 'red' : 'green'}">${label.toUpperCase()}</span><br>
+        Confidence: ${conf}
+      `;
+    }
+    document.getElementById('predictionText').innerHTML = `
+      Prediction: <span style="color: ${label === 'defected' ? 'red' : 'green'}">${label.toUpperCase()}</span><br>
+      Confidence: ${conf}
+    `;
+
+    const confFloat = parseFloat(conf.replace('%', '')) / 100;
+    const defectedProb = label === 'defected' ? confFloat : (1 - confFloat);
+    const nonDefectedProb = label === 'non-defected' ? confFloat : (1 - confFloat);
+
+    document.getElementById('probabilityText').innerHTML = `
+      Defected Probability: <span style="color:red;">${(defectedProb * 100).toFixed(1)}%</span><br>
+      Non-Defected Probability: <span style="color:green;">${(nonDefectedProb * 100).toFixed(1)}%</span>
+    `;
+
+
+  </script>
+</body>
+</html>
