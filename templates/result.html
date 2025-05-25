@@ -83,6 +83,9 @@
         <img id="overlayImg" src="" alt="Overlay">
       </div>
     </div>
+    <div style="max-width: 600px; margin: 0 auto 40px auto;">
+        <canvas id="probabilityChart"></canvas>
+    </div>
     <div class="prediction-result" id="predictionText">Loading prediction...</div>
     <div class="prediction-result" id="probabilityText"></div>
   </div>
@@ -104,6 +107,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     const query = new URLSearchParams(window.location.search);
     const original = query.get('original');
@@ -138,7 +142,65 @@
       Non-Defected Probability: <span style="color:green;">${(nonDefectedProb * 100).toFixed(1)}%</span>
     `;
 
+  function drawProbabilityChart(defected, nonDefected) {
+    const ctx = document.getElementById('probabilityChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Defected', 'Non-Defected'],
+        datasets: [{
+          label: 'Probability',
+          data: [(defectedProb * 100).toFixed(1), (nonDefectedProb * 100).toFixed(1)],
+          backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(75, 192, 192, 0.7)'],
+          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'],
+          borderWidth: 1,
+          barThickness: 40  // ✅ 控制柱子的宽度，默认是自动宽
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 16   // ✅ Y轴文字大小
+              }
+            },
+            title: {
+              display: true,
+              text: 'Probability (%)',
+              font: {
+                size: 18   // ✅ Y轴标题字体大小
+              }
+            }
+          },
+          x: {
+            ticks: {
+              font: {
+                size: 16   // ✅ X轴文字大小
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false  // ✅ 关闭图例显示
+          },
+          tooltip: {
+            titleFont: {
+              size: 16
+            },
+            bodyFont: {
+              size: 14
+            }
+          }
+        }
+      }
+    });
+  }
 
+  drawProbabilityChart(defectedProb, nonDefectedProb);
   </script>
 </body>
 </html>

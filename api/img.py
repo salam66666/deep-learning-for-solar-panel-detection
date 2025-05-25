@@ -82,8 +82,12 @@ def upload_file():
         processed = preprocess_image(filepath)
         prediction = model.predict(processed)
         confidence = float(prediction[0][0])
-        class_name = "defected" if confidence > 0.5 else "non-defected"
-        confidence_score = abs(confidence - 0.5) * 2
+        if confidence > 0.5:
+            class_name = "defected"
+            confidence_score = confidence
+        else:
+            class_name = "non-defected"
+            confidence_score = 1 - confidence
         confidence_str = f"{confidence_score:.1%}"
 
         # === 保存到缓存 ===
@@ -231,8 +235,12 @@ def predict_with_heatmap():
 
         prediction = model.predict(processed_input)
         confidence = float(prediction[0][0])
-        class_name = "defected" if confidence > 0.5 else "non-defected"
-        confidence_score = abs(confidence - 0.5) * 2
+        if confidence > 0.5:
+            class_name = "defected"
+            confidence_score = confidence
+        else:
+            class_name = "non-defected"
+            confidence_score = 1 - confidence
         confidence_str = f"{confidence_score:.1%}"
 
         heatmap = generate_grad_cam(model, processed_input, "inception_block")
